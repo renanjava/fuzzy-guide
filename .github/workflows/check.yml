@@ -2,8 +2,6 @@ name: "Verificação básica de código"
 
 on:
   push:
-    branches:
-      - "*"
     branches-ignore:
       - "main"
       - "release"
