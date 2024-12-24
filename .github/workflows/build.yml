@@ -13,4 +13,7 @@ jobs:
 
     - name: Buildar o Docker Compose
       run: docker compose build
-      
+
+  docker:
+    needs: build
+    uses: ./.github/workflows/docker.yml
