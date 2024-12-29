@@ -1,17 +1,12 @@
-import { faker } from '@faker-js/faker'
 import { CampanhaEntity, CampanhaProps } from '../../campanha.entity'
+import { CampanhaDataBuilder } from '@/campanha/domain/testing/helpers/campanha-data-builder'
 
 describe('CampanhaEntity unit tests', () => {
   let props: CampanhaProps
   let sut: CampanhaEntity
 
   beforeEach(() => {
-    props = {
-      qtdBilhetesTotais: faker.number.int(),
-      dataInicioCampanha: faker.date.recent(),
-      campanhaAtiva: true,
-      valorUnitarioBilhete: faker.number.float(),
-    }
+    props = CampanhaDataBuilder({})
     sut = new CampanhaEntity(props)
   })
   it('constructor method', () => {
