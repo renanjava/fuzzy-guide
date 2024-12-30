@@ -1,3 +1,5 @@
+import { Entity } from '@/shared/domain/entities/entity'
+
 export type CampanhaProps = {
   qtdBilhetesTotais: number
   qtdBilhetesComprados?: number
@@ -8,8 +10,12 @@ export type CampanhaProps = {
   valorUnitarioBilhete: number
 }
 
-export class CampanhaEntity {
-  constructor(public readonly props: CampanhaProps) {
+export class CampanhaEntity extends Entity<CampanhaProps> {
+  constructor(
+    public readonly props: CampanhaProps,
+    id?: string,
+  ) {
+    super(props, id)
     this.props.qtdBilhetesComprados = this.props.qtdBilhetesComprados ?? 0
     this.props.dataFimCampanha = this.props.dataFimCampanha ?? null
     this.props.porcentagemProgresso = this.props.porcentagemProgresso ?? 0
