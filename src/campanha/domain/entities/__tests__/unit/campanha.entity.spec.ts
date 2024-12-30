@@ -40,6 +40,16 @@ describe('CampanhaEntity unit tests', () => {
     expect(typeof sut.props.campanhaAtiva).toBe('boolean')
   })
 
+  it('setter campanhaAtiva', () => {
+    sut['campanhaAtiva'] = false
+    expect(sut.props.campanhaAtiva).toBeFalsy()
+  })
+
+  it('should update campanhaAtiva', () => {
+    sut.updateCampanhaAtiva(false)
+    expect(sut.props.campanhaAtiva).toBeFalsy()
+  })
+
   it('getter valorUnitarioBilhete', () => {
     expect(sut.valorUnitarioBilhete).toEqual(props.valorUnitarioBilhete)
     expect(sut.props.valorUnitarioBilhete).toBeDefined()
@@ -54,6 +64,16 @@ describe('CampanhaEntity unit tests', () => {
     expect(typeof sut.props.qtdBilhetesComprados).toBe('number')
   })
 
+  it('setter qtdBilhetesComprados', () => {
+    sut['qtdBilhetesComprados'] = 100
+    expect(sut.props.qtdBilhetesComprados).toEqual(100)
+  })
+
+  it('should update qtdBilhetesComprados', () => {
+    sut.updateQtdBilhetesComprados(500)
+    expect(sut.props.qtdBilhetesComprados).toEqual(500)
+  })
+
   it('getter dataFimCampanha', () => {
     expect(sut.dataFimCampanha).toBeNull()
     expect(sut.props.dataFimCampanha).toBeDefined()
@@ -61,10 +81,32 @@ describe('CampanhaEntity unit tests', () => {
     expect(sut.props.dataFimCampanha).toBeNull()
   })
 
+  it('setter dataFimCampanha', () => {
+    const prop = new Date()
+    sut['dataFimCampanha'] = prop
+    expect(sut.props.dataFimCampanha).toEqual(prop)
+  })
+
+  it('should update dataFimCampanha', () => {
+    const prop = new Date()
+    sut.updateDataFimCampanha(prop)
+    expect(sut.props.dataFimCampanha).toEqual(prop)
+  })
+
   it('getter porcentagemProgresso', () => {
     expect(sut.porcentagemProgresso).toEqual(0)
     expect(sut.props.porcentagemProgresso).toBeDefined()
     expect(sut.props.porcentagemProgresso).toEqual(props.porcentagemProgresso)
     expect(typeof sut.props.porcentagemProgresso).toBe('number')
+  })
+
+  it('setter porcentagemProgresso', () => {
+    sut['porcentagemProgresso'] = 80
+    expect(sut.props.porcentagemProgresso).toEqual(80)
+  })
+
+  it('should update porcentagemProgresso', () => {
+    sut.updatePorcentagemProgresso(250)
+    expect(sut.props.porcentagemProgresso).toEqual(250)
   })
 })
