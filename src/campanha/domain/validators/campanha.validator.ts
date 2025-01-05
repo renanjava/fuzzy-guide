@@ -1,19 +1,23 @@
 import {
   IsBoolean,
   IsDate,
+  IsInt,
   IsNotEmpty,
   IsNumber,
   IsOptional,
+  IsPositive,
+  Min,
 } from 'class-validator'
 import { CampanhaProps } from '../entities/campanha.entity'
 import { ClassValidatorFields } from '@/shared/domain/validators/class-validator-fields'
 
 export class CampanhaRules {
-  @IsNumber()
-  @IsNotEmpty()
+  @IsInt()
+  @Min(10)
+  @IsPositive()
   qtdBilhetesTotais: number
 
-  @IsNumber()
+  @IsInt()
   @IsOptional()
   qtdBilhetesComprados?: number
 
