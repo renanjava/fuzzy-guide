@@ -1,4 +1,5 @@
 import { Entity } from '@/shared/domain/entities/entity'
+import { CampanhaValidatorFactory } from '../validators/campanha.validator'
 
 export type CampanhaProps = {
   qtdBilhetesTotais: number
@@ -15,6 +16,7 @@ export class CampanhaEntity extends Entity<CampanhaProps> {
     public readonly props: CampanhaProps,
     id?: string,
   ) {
+    CampanhaEntity.validate(props)
     super(props, id)
     this.props.qtdBilhetesComprados = this.props.qtdBilhetesComprados ?? 0
     this.props.dataFimCampanha = this.props.dataFimCampanha ?? null
@@ -22,18 +24,22 @@ export class CampanhaEntity extends Entity<CampanhaProps> {
   }
 
   updateQtdBilhetesComprados(value: number): void {
+    CampanhaEntity.validate({ ...this.props, qtdBilhetesComprados: value })
     this.qtdBilhetesComprados = value
   }
 
   updateDataFimCampanha(value: Date): void {
+    CampanhaEntity.validate({ ...this.props, dataFimCampanha: value })
     this.dataFimCampanha = value
   }
 
   updatePorcentagemProgresso(value: number): void {
+    CampanhaEntity.validate({ ...this.props, porcentagemProgresso: value })
     this.porcentagemProgresso = value
   }
 
   updateCampanhaAtiva(value: boolean): void {
+    CampanhaEntity.validate({ ...this.props, campanhaAtiva: value })
     this.campanhaAtiva = value
   }
 
@@ -79,5 +85,10 @@ export class CampanhaEntity extends Entity<CampanhaProps> {
 
   get valorUnitarioBilhete(): number {
     return this.props.valorUnitarioBilhete
+  }
+
+  static validate(props: CampanhaProps) {
+    const validator = CampanhaValidatorFactory.create()
+    validator.validate(props)
   }
 }
