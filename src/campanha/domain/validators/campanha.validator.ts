@@ -6,30 +6,43 @@ import {
   IsNumber,
   IsOptional,
   IsPositive,
+  Max,
+  MaxDate,
   Min,
+  MinDate,
 } from 'class-validator'
 import { CampanhaProps } from '../entities/campanha.entity'
 import { ClassValidatorFields } from '@/shared/domain/validators/class-validator-fields'
+import { DomainRules } from '../common/domain.rules'
+import { DateRules } from '../common/date.rules'
 
 export class CampanhaRules {
   @IsInt()
-  @Min(10)
+  @Min(DomainRules.MIN_BILHETES_TOTAIS)
+  @Max(DomainRules.MAX_BILHETES)
   @IsPositive()
   qtdBilhetesTotais: number
 
   @IsInt()
+  @Min(DomainRules.MIN_BILHETES_COMPRADOS)
+  @Max(DomainRules.MAX_BILHETES)
   @IsOptional()
-  qtdBilhetesComprados?: number
+  qtdBilhetesComprados: number
 
   @IsDate()
+  @MinDate(DateRules.MIN_TODAY)
+  @MaxDate(DateRules.MAX_TODAY)
   @IsNotEmpty()
   dataInicioCampanha: Date
 
   @IsDate()
+  @MinDate(DateRules.TOMORROW)
   @IsOptional()
   dataFimCampanha?: Date
 
-  @IsNumber()
+  @Min(DomainRules.MIN_PROGRESS_PERCENTAGE)
+  @Max(DomainRules.MAX_PROGRESS_PERCENTAGE)
+  @IsNumber({ allowInfinity: false, allowNaN: false, maxDecimalPlaces: 2 })
   @IsOptional()
   porcentagemProgresso?: number
 
@@ -37,8 +50,8 @@ export class CampanhaRules {
   @IsBoolean()
   campanhaAtiva: boolean
 
+  @IsNumber({ allowInfinity: false, allowNaN: false, maxDecimalPlaces: 2 })
   @IsNotEmpty()
-  @IsNumber()
   valorUnitarioBilhete: number
 
   constructor({
