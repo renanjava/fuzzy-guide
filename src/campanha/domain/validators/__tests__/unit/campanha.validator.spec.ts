@@ -262,8 +262,8 @@ describe('CampanhaValidator Unit tests', () => {
       })
       expect(isValid).toBeFalsy()
       expect(sut.errors['dataInicioCampanha']).toStrictEqual([
-        `maximal allowed date for dataInicioCampanha is ${DateRules.MIN_TODAY}`,
-        `minimal allowed date for dataInicioCampanha is ${DateRules.MAX_TODAY}`,
+        `maximal allowed date for dataInicioCampanha is ${DateRules.MAX_TODAY}`,
+        `minimal allowed date for dataInicioCampanha is ${DateRules.MIN_TODAY}`,
         'dataInicioCampanha must be a Date instance',
       ])
     })
@@ -276,8 +276,8 @@ describe('CampanhaValidator Unit tests', () => {
       expect(isValid).toBeFalsy()
       expect(sut.errors['dataInicioCampanha']).toStrictEqual([
         'dataInicioCampanha should not be empty',
-        `maximal allowed date for dataInicioCampanha is ${DateRules.MIN_TODAY}`,
-        `minimal allowed date for dataInicioCampanha is ${DateRules.MAX_TODAY}`,
+        `maximal allowed date for dataInicioCampanha is ${DateRules.MAX_TODAY}`,
+        `minimal allowed date for dataInicioCampanha is ${DateRules.MIN_TODAY}`,
         'dataInicioCampanha must be a Date instance',
       ])
     })
