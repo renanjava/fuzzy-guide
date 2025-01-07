@@ -6,10 +6,12 @@ describe('CampanhaEntity unit tests', () => {
   let sut: CampanhaEntity
 
   beforeEach(() => {
+    CampanhaEntity.validate = jest.fn()
     props = CampanhaDataBuilder({})
     sut = new CampanhaEntity(props)
   })
   it('constructor method', () => {
+    expect(CampanhaEntity.validate).toHaveBeenCalled()
     expect(sut.props.qtdBilhetesTotais).toEqual(props.qtdBilhetesTotais)
     expect(sut.props.dataInicioCampanha).toEqual(props.dataInicioCampanha)
     expect(sut.props.campanhaAtiva).toEqual(props.campanhaAtiva)
@@ -46,6 +48,7 @@ describe('CampanhaEntity unit tests', () => {
   })
 
   it('should update campanhaAtiva', () => {
+    expect(CampanhaEntity.validate).toHaveBeenCalled()
     sut.updateCampanhaAtiva(false)
     expect(sut.props.campanhaAtiva).toBeFalsy()
   })
@@ -70,6 +73,7 @@ describe('CampanhaEntity unit tests', () => {
   })
 
   it('should update qtdBilhetesComprados', () => {
+    expect(CampanhaEntity.validate).toHaveBeenCalled()
     sut.updateQtdBilhetesComprados(500)
     expect(sut.props.qtdBilhetesComprados).toEqual(500)
   })
@@ -88,6 +92,7 @@ describe('CampanhaEntity unit tests', () => {
   })
 
   it('should update dataFimCampanha', () => {
+    expect(CampanhaEntity.validate).toHaveBeenCalled()
     const prop = new Date()
     sut.updateDataFimCampanha(prop)
     expect(sut.props.dataFimCampanha).toEqual(prop)
@@ -106,6 +111,7 @@ describe('CampanhaEntity unit tests', () => {
   })
 
   it('should update porcentagemProgresso', () => {
+    expect(CampanhaEntity.validate).toHaveBeenCalled()
     sut.updatePorcentagemProgresso(250)
     expect(sut.props.porcentagemProgresso).toEqual(250)
   })
