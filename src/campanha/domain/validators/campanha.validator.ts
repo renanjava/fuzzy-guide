@@ -27,7 +27,7 @@ export class CampanhaRules {
   @Min(DomainRules.MIN_BILHETES_COMPRADOS)
   @Max(DomainRules.MAX_BILHETES)
   @IsOptional()
-  qtdBilhetesComprados: number
+  qtdBilhetesComprados?: number
 
   @IsDate()
   @MinDate(DateRules.MIN_TODAY)

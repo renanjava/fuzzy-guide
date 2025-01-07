@@ -4,6 +4,7 @@ import {
   CampanhaValidator,
   CampanhaValidatorFactory,
 } from '../../campanha.validator'
+import { DateRules } from '@/campanha/domain/common/date.rules'
 //import { CampanhaProps } from '@/campanha/domain/entities/campanha.entity'
 
 let sut: CampanhaValidator
@@ -244,39 +245,30 @@ describe('CampanhaValidator Unit tests', () => {
 
   describe('DataInicioCampanha Field', () => {
     it('should return error when dataInicioCampanha is a past date', () => {
-      const yesterday = new Date(new Date().setDate(new Date().getDate() - 1))
-      const minimalDate = new Date(new Date().setHours(0, 0, 0, 0))
-
       const isValid = sut.validate({
         ...CampanhaDataBuilder({}),
-        dataInicioCampanha: yesterday,
+        dataInicioCampanha: DateRules.YESTERDAY,
       })
       expect(isValid).toBeFalsy()
       expect(sut.errors['dataInicioCampanha']).toStrictEqual([
-        `minimal allowed date for dataInicioCampanha is ${minimalDate}`,
+        `minimal allowed date for dataInicioCampanha is ${DateRules.MIN_TODAY}`,
       ])
     })
 
     it('should return error when dataInicioCampanha is an invalid date', () => {
-      const minimalDate = new Date(new Date().setHours(0, 0, 0, 0))
-      const maximalDate = new Date(new Date().setHours(23, 59, 59, 999))
-
       const isValid = sut.validate({
         ...CampanhaDataBuilder({}),
         dataInicioCampanha: 'invalid-date' as any,
       })
       expect(isValid).toBeFalsy()
       expect(sut.errors['dataInicioCampanha']).toStrictEqual([
-        `maximal allowed date for dataInicioCampanha is ${maximalDate}`,
-        `minimal allowed date for dataInicioCampanha is ${minimalDate}`,
+        `maximal allowed date for dataInicioCampanha is ${DateRules.MIN_TODAY}`,
+        `minimal allowed date for dataInicioCampanha is ${DateRules.MAX_TODAY}`,
         'dataInicioCampanha must be a Date instance',
       ])
     })
 
     it('should return error when dataInicioCampanha is null', () => {
-      const minimalDate = new Date(new Date().setHours(0, 0, 0, 0))
-      const maximalDate = new Date(new Date().setHours(23, 59, 59, 999))
-
       const isValid = sut.validate({
         ...CampanhaDataBuilder({}),
         dataInicioCampanha: null as any,
@@ -284,8 +276,8 @@ describe('CampanhaValidator Unit tests', () => {
       expect(isValid).toBeFalsy()
       expect(sut.errors['dataInicioCampanha']).toStrictEqual([
         'dataInicioCampanha should not be empty',
-        `maximal allowed date for dataInicioCampanha is ${maximalDate}`,
-        `minimal allowed date for dataInicioCampanha is ${minimalDate}`,
+        `maximal allowed date for dataInicioCampanha is ${DateRules.MIN_TODAY}`,
+        `minimal allowed date for dataInicioCampanha is ${DateRules.MAX_TODAY}`,
         'dataInicioCampanha must be a Date instance',
       ])
     })
