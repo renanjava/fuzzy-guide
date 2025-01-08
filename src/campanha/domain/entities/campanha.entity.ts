@@ -1,5 +1,6 @@
 import { Entity } from '@/shared/domain/entities/entity'
 import { CampanhaValidatorFactory } from '../validators/campanha.validator'
+import { EntityValidationError } from '@/shared/domain/errors/validation-error'
 
 export type CampanhaProps = {
   qtdBilhetesTotais: number
@@ -89,6 +90,9 @@ export class CampanhaEntity extends Entity<CampanhaProps> {
 
   static validate(props: CampanhaProps) {
     const validator = CampanhaValidatorFactory.create()
-    validator.validate(props)
+    const isValid = validator.validate(props)
+    if (!isValid) {
+      throw new EntityValidationError(validator.errors)
+    }
   }
 }
