@@ -27,6 +27,7 @@ export class CampanhaRules {
   @Min(DomainRules.MIN_BILHETES_COMPRADOS)
   @Max(DomainRules.MAX_BILHETES)
   @IsOptional()
+  @IsPositive()
   qtdBilhetesComprados?: number
 
   @IsDate()

@@ -17,17 +17,6 @@ describe('CampanhaValidator Unit tests', () => {
   })
 
   describe('QtdBilhetesTotais Field', () => {
-    it('should return false and specific errors when qtdBilhetesTotais is null', () => {
-      const isValid = sut.validate(null as any)
-      expect(isValid).toBeFalsy()
-      expect(sut.errors['qtdBilhetesTotais']).toStrictEqual([
-        'qtdBilhetesTotais must be a positive number',
-        'qtdBilhetesTotais must not be greater than 99999',
-        'qtdBilhetesTotais must not be less than 10',
-        'qtdBilhetesTotais must be an integer number',
-      ])
-    })
-
     it('should return false and specific errors when qtdBilhetesTotais is less than 10', () => {
       const isValid = sut.validate({
         ...CampanhaDataBuilder({}),
@@ -115,6 +104,31 @@ describe('CampanhaValidator Unit tests', () => {
       ])
     })
 
+    it('should return false and specific errors when qtdBilhetesTotais is null', () => {
+      const isValid = sut.validate({
+        ...CampanhaDataBuilder({}),
+        qtdBilhetesTotais: null,
+      })
+      expect(isValid).toBeFalsy()
+      expect(sut.errors['qtdBilhetesTotais']).toStrictEqual([
+        'qtdBilhetesTotais must be a positive number',
+        'qtdBilhetesTotais must not be greater than 99999',
+        'qtdBilhetesTotais must not be less than 10',
+        'qtdBilhetesTotais must be an integer number',
+      ])
+    })
+
+    it('should return false and specific errors when qtdBilhetesTotais is more than 999999', () => {
+      const isValid = sut.validate({
+        ...CampanhaDataBuilder({}),
+        qtdBilhetesTotais: 1000000,
+      })
+      expect(isValid).toBeFalsy()
+      expect(sut.errors['qtdBilhetesTotais']).toStrictEqual([
+        'qtdBilhetesTotais must not be greater than 99999',
+      ])
+    })
+
     /*
     it('should return true and validate the correct value for qtdBilhetesTotais', () => {
       let qtdBilhetesTotais = 999999
@@ -141,17 +155,6 @@ describe('CampanhaValidator Unit tests', () => {
   })
 
   describe('QtdBilhetesComprados Field', () => {
-    it('should return false and specific errors when qtdBilhetesComprados is less than 0', () => {
-      const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
-        qtdBilhetesComprados: -1,
-      })
-      expect(isValid).toBeFalsy()
-      expect(sut.errors['qtdBilhetesComprados']).toStrictEqual([
-        'qtdBilhetesComprados must not be less than 0',
-      ])
-    })
-
     it('should return false and specific errors when qtdBilhetesComprados is a decimal', () => {
       const isValid = sut.validate({
         ...CampanhaDataBuilder({}),
@@ -170,9 +173,22 @@ describe('CampanhaValidator Unit tests', () => {
       })
       expect(isValid).toBeFalsy()
       expect(sut.errors['qtdBilhetesComprados']).toStrictEqual([
+        'qtdBilhetesComprados must be a positive number',
         'qtdBilhetesComprados must not be greater than 99999',
         'qtdBilhetesComprados must not be less than 0',
         'qtdBilhetesComprados must be an integer number',
+      ])
+    })
+
+    it('should return false and specific errors when qtdBilhetesComprados is a negative number', () => {
+      const isValid = sut.validate({
+        ...CampanhaDataBuilder({}),
+        qtdBilhetesComprados: -200,
+      })
+      expect(isValid).toBeFalsy()
+      expect(sut.errors['qtdBilhetesComprados']).toStrictEqual([
+        'qtdBilhetesComprados must be a positive number',
+        'qtdBilhetesComprados must not be less than 0',
       ])
     })
 
@@ -195,6 +211,7 @@ describe('CampanhaValidator Unit tests', () => {
       })
       expect(isValid).toBeFalsy()
       expect(sut.errors['qtdBilhetesComprados']).toStrictEqual([
+        'qtdBilhetesComprados must be a positive number',
         'qtdBilhetesComprados must not be less than 0',
         'qtdBilhetesComprados must be an integer number',
       ])
@@ -207,9 +224,21 @@ describe('CampanhaValidator Unit tests', () => {
       })
       expect(isValid).toBeFalsy()
       expect(sut.errors['qtdBilhetesComprados']).toStrictEqual([
+        'qtdBilhetesComprados must be a positive number',
         'qtdBilhetesComprados must not be greater than 99999',
         'qtdBilhetesComprados must not be less than 0',
         'qtdBilhetesComprados must be an integer number',
+      ])
+    })
+
+    it('should return false and specific errors when qtdBilhetesComprados is more than 999999', () => {
+      const isValid = sut.validate({
+        ...CampanhaDataBuilder({}),
+        qtdBilhetesComprados: 1000000,
+      })
+      expect(isValid).toBeFalsy()
+      expect(sut.errors['qtdBilhetesComprados']).toStrictEqual([
+        'qtdBilhetesComprados must not be greater than 99999',
       ])
     })
 
