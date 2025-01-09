@@ -1,19 +1,19 @@
 import { CampanhaDataBuilder } from '@/campanha/domain/testing/helpers/campanha-data-builder'
 import {
-  //CampanhaRules,
+  CampanhaRules,
   CampanhaValidator,
   CampanhaValidatorFactory,
 } from '../../campanha.validator'
 import { DateRules } from '@/campanha/domain/common/date.rules'
 import { DomainRules } from '@/campanha/domain/common/domain.rules'
-//import { CampanhaProps } from '@/campanha/domain/entities/campanha.entity'
+import { CampanhaProps } from '@/campanha/domain/entities/campanha.entity'
 
 let sut: CampanhaValidator
-//let props: CampanhaProps
+let props: CampanhaProps
 describe('CampanhaValidator Unit tests', () => {
   beforeEach(() => {
     sut = CampanhaValidatorFactory.create()
-    //props = CampanhaDataBuilder({})
+    props = CampanhaDataBuilder({})
   })
 
   describe('QtdBilhetesTotais Field', () => {
@@ -129,7 +129,6 @@ describe('CampanhaValidator Unit tests', () => {
       ])
     })
 
-    /*
     it('should return true and validate the correct value for qtdBilhetesTotais', () => {
       let qtdBilhetesTotais = DomainRules.MAX_BILHETES
       let isValid = sut.validate({
@@ -150,8 +149,7 @@ describe('CampanhaValidator Unit tests', () => {
       expect(sut.validatedData).toStrictEqual(
         new CampanhaRules({ ...props, qtdBilhetesTotais: qtdBilhetesTotais }),
       )
-  })
-  */
+    })
   })
 
   describe('QtdBilhetesComprados Field', () => {
@@ -238,7 +236,6 @@ describe('CampanhaValidator Unit tests', () => {
       ])
     })
 
-    /*
     it('should return true and validate the correct value for qtdBilhetesComprados', () => {
       let qtdBilhetesComprados = 999999
       let isValid = sut.validate({
@@ -266,7 +263,6 @@ describe('CampanhaValidator Unit tests', () => {
         }),
       )
     })
-    */
   })
 
   describe('DataInicioCampanha Field', () => {
@@ -319,7 +315,6 @@ describe('CampanhaValidator Unit tests', () => {
       ])
     })
 
-    /*
     it('should return valid when dataInicioCampanha is a valid date', () => {
       const isValid = sut.validate({
         ...props,
@@ -330,7 +325,6 @@ describe('CampanhaValidator Unit tests', () => {
         new CampanhaRules({ ...props, dataInicioCampanha: DateRules.TODAY }),
       )
     })
-    */
   })
 
   describe('DataFimCampanha Field', () => {
@@ -368,31 +362,28 @@ describe('CampanhaValidator Unit tests', () => {
       ])
     })
 
-    /*
     it('should return valid when dataFimCampanha is a future date', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         dataFimCampanha: DateRules.TOMORROW,
       })
       expect(isValid).toBeTruthy()
       expect(sut.validatedData).toStrictEqual(
-        new CampanhaRules({ ...props, dataFimCampanha: DateRules.TOMORROW }
+        new CampanhaRules({ ...props, dataFimCampanha: DateRules.TOMORROW }),
       )
     })
 
     it('should return valid when dataFimCampanha is null', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         dataFimCampanha: null as any,
       })
       expect(isValid).toBeTruthy()
       expect(sut.validatedData).toStrictEqual(
-        new CampanhaRules({ ...props, dataFimCampanha: null }
+        new CampanhaRules({ ...props, dataFimCampanha: null }),
       )
     })
-    */
   })
-
   describe('PorcentagemProgresso Field', () => {
     it('should return error when porcentagemProgresso is below the minimum value', () => {
       const isValid = sut.validate({
@@ -439,18 +430,21 @@ describe('CampanhaValidator Unit tests', () => {
         'porcentagemProgresso must be a number conforming to the specified constraints',
       ])
     })
-
-    /*
     it('should return valid when porcentagemProgresso is within the valid range and is a valid number', () => {
+      const porcentagemProgresso = 50.0
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
-        porcentagemProgresso: 50.0,
+        ...props,
+        porcentagemProgresso: porcentagemProgresso,
       })
       expect(isValid).toBeTruthy()
+      expect(sut.validatedData).toStrictEqual(
+        new CampanhaRules({
+          ...props,
+          porcentagemProgresso: porcentagemProgresso,
+        }),
+      )
     })
-    */
   })
-
   describe('CampanhaAtiva Field', () => {
     it('should return error when campanhaAtiva is not a boolean', () => {
       const isValid = sut.validate({
@@ -474,24 +468,34 @@ describe('CampanhaValidator Unit tests', () => {
         'campanhaAtiva should not be empty',
       ])
     })
-
-    /*
     it('should return valid when campanhaAtiva is true', () => {
+      const campanhaAtiva = true
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
-        campanhaAtiva: true,
+        ...props,
+        campanhaAtiva: campanhaAtiva,
       })
       expect(isValid).toBeTruthy()
+      expect(sut.validatedData).toStrictEqual(
+        new CampanhaRules({
+          ...props,
+          campanhaAtiva: campanhaAtiva,
+        }),
+      )
     })
-
     it('should return valid when campanhaAtiva is false', () => {
+      const campanhaAtiva = false
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
-        campanhaAtiva: false,
+        ...props,
+        campanhaAtiva: campanhaAtiva,
       })
       expect(isValid).toBeTruthy()
+      expect(sut.validatedData).toStrictEqual(
+        new CampanhaRules({
+          ...props,
+          campanhaAtiva: campanhaAtiva,
+        }),
+      )
     })
-    */
   })
 
   describe('ValorUnitarioBilhete Field', () => {
@@ -518,17 +522,20 @@ describe('CampanhaValidator Unit tests', () => {
         'valorUnitarioBilhete must be a number conforming to the specified constraints',
       ])
     })
-
-    /*
     it('should return valid when valorUnitarioBilhete is a valid number', () => {
+      const valorUnitarioBilhete = 10.5
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
-        valorUnitarioBilhete: 10.5,
+        ...props,
+        valorUnitarioBilhete: valorUnitarioBilhete,
       })
       expect(isValid).toBeTruthy()
+      expect(sut.validatedData).toStrictEqual(
+        new CampanhaRules({
+          ...props,
+          valorUnitarioBilhete: valorUnitarioBilhete,
+        }),
+      )
     })
-    */
-
     it('should return error when valorUnitarioBilhete is empty', () => {
       const isValid = sut.validate({
         ...CampanhaDataBuilder({}),

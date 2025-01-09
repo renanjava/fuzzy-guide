@@ -209,7 +209,6 @@ describe('CampanhaEntity integration tests', () => {
       )
     })
 
-    /*
     it('should a valid Campanha', () => {
       expect.assertions(0)
       const props: CampanhaProps = {
@@ -217,7 +216,6 @@ describe('CampanhaEntity integration tests', () => {
       }
       new CampanhaEntity(props)
     })
-    */
   })
 
   describe('Update method', () => {
@@ -230,14 +228,12 @@ describe('CampanhaEntity integration tests', () => {
       expect(() => entity.updateCampanhaAtiva(null)).toThrowError(
         EntityValidationError,
       )
+    })
 
-      /*
-      it('should a valid CampanhaAtiva update', () => {
-        expect.assertions(0)
-        const entity = new CampanhaEntity(CampanhaDataBuilder({}))
-        entity.updateCampanhaAtiva(false)
-      })
-        */
+    it('should a valid CampanhaAtiva update', () => {
+      expect.assertions(0)
+      const entity = new CampanhaEntity(CampanhaDataBuilder({}))
+      entity.updateCampanhaAtiva(false)
     })
   })
 })
