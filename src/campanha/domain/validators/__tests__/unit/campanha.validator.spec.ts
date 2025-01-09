@@ -36,7 +36,7 @@ describe('CampanhaValidator Unit tests', () => {
       expect(isValid).toBeFalsy()
       expect(sut.errors['qtdBilhetesTotais']).toStrictEqual([
         'qtdBilhetesTotais must be a positive number',
-        'qtdBilhetesTotais must not be greater than 99999',
+        `qtdBilhetesTotais must not be greater than ${DomainRules.MAX_BILHETES}`,
         'qtdBilhetesTotais must not be less than 10',
         'qtdBilhetesTotais must be an integer number',
       ])
@@ -49,7 +49,7 @@ describe('CampanhaValidator Unit tests', () => {
       })
       expect(isValid).toBeFalsy()
       expect(sut.errors['qtdBilhetesTotais']).toStrictEqual([
-        'qtdBilhetesTotais must not be greater than 99999',
+        `qtdBilhetesTotais must not be greater than ${DomainRules.MAX_BILHETES}`,
         'qtdBilhetesTotais must be an integer number',
       ])
     })
@@ -98,7 +98,7 @@ describe('CampanhaValidator Unit tests', () => {
       expect(isValid).toBeFalsy()
       expect(sut.errors['qtdBilhetesTotais']).toStrictEqual([
         'qtdBilhetesTotais must be a positive number',
-        'qtdBilhetesTotais must not be greater than 99999',
+        `qtdBilhetesTotais must not be greater than ${DomainRules.MAX_BILHETES}`,
         'qtdBilhetesTotais must not be less than 10',
         'qtdBilhetesTotais must be an integer number',
       ])
@@ -112,7 +112,7 @@ describe('CampanhaValidator Unit tests', () => {
       expect(isValid).toBeFalsy()
       expect(sut.errors['qtdBilhetesTotais']).toStrictEqual([
         'qtdBilhetesTotais must be a positive number',
-        'qtdBilhetesTotais must not be greater than 99999',
+        `qtdBilhetesTotais must not be greater than ${DomainRules.MAX_BILHETES}`,
         'qtdBilhetesTotais must not be less than 10',
         'qtdBilhetesTotais must be an integer number',
       ])
@@ -125,13 +125,13 @@ describe('CampanhaValidator Unit tests', () => {
       })
       expect(isValid).toBeFalsy()
       expect(sut.errors['qtdBilhetesTotais']).toStrictEqual([
-        'qtdBilhetesTotais must not be greater than 99999',
+        `qtdBilhetesTotais must not be greater than ${DomainRules.MAX_BILHETES}`,
       ])
     })
 
     /*
     it('should return true and validate the correct value for qtdBilhetesTotais', () => {
-      let qtdBilhetesTotais = 999999
+      let qtdBilhetesTotais = DomainRules.MAX_BILHETES
       let isValid = sut.validate({
         ...props,
         qtdBilhetesTotais: qtdBilhetesTotais,
@@ -173,8 +173,7 @@ describe('CampanhaValidator Unit tests', () => {
       })
       expect(isValid).toBeFalsy()
       expect(sut.errors['qtdBilhetesComprados']).toStrictEqual([
-        'qtdBilhetesComprados must be a positive number',
-        'qtdBilhetesComprados must not be greater than 99999',
+        `qtdBilhetesComprados must not be greater than ${DomainRules.MAX_BILHETES}`,
         'qtdBilhetesComprados must not be less than 0',
         'qtdBilhetesComprados must be an integer number',
       ])
@@ -187,7 +186,6 @@ describe('CampanhaValidator Unit tests', () => {
       })
       expect(isValid).toBeFalsy()
       expect(sut.errors['qtdBilhetesComprados']).toStrictEqual([
-        'qtdBilhetesComprados must be a positive number',
         'qtdBilhetesComprados must not be less than 0',
       ])
     })
@@ -199,7 +197,7 @@ describe('CampanhaValidator Unit tests', () => {
       })
       expect(isValid).toBeFalsy()
       expect(sut.errors['qtdBilhetesComprados']).toStrictEqual([
-        'qtdBilhetesComprados must not be greater than 99999',
+        `qtdBilhetesComprados must not be greater than ${DomainRules.MAX_BILHETES}`,
         'qtdBilhetesComprados must be an integer number',
       ])
     })
@@ -211,7 +209,6 @@ describe('CampanhaValidator Unit tests', () => {
       })
       expect(isValid).toBeFalsy()
       expect(sut.errors['qtdBilhetesComprados']).toStrictEqual([
-        'qtdBilhetesComprados must be a positive number',
         'qtdBilhetesComprados must not be less than 0',
         'qtdBilhetesComprados must be an integer number',
       ])
@@ -224,8 +221,7 @@ describe('CampanhaValidator Unit tests', () => {
       })
       expect(isValid).toBeFalsy()
       expect(sut.errors['qtdBilhetesComprados']).toStrictEqual([
-        'qtdBilhetesComprados must be a positive number',
-        'qtdBilhetesComprados must not be greater than 99999',
+        `qtdBilhetesComprados must not be greater than ${DomainRules.MAX_BILHETES}`,
         'qtdBilhetesComprados must not be less than 0',
         'qtdBilhetesComprados must be an integer number',
       ])
@@ -238,7 +234,7 @@ describe('CampanhaValidator Unit tests', () => {
       })
       expect(isValid).toBeFalsy()
       expect(sut.errors['qtdBilhetesComprados']).toStrictEqual([
-        'qtdBilhetesComprados must not be greater than 99999',
+        `qtdBilhetesComprados must not be greater than ${DomainRules.MAX_BILHETES}`,
       ])
     })
 
@@ -467,6 +463,18 @@ describe('CampanhaValidator Unit tests', () => {
       ])
     })
 
+    it('should return error when campanhaAtiva is null', () => {
+      const isValid = sut.validate({
+        ...CampanhaDataBuilder({}),
+        campanhaAtiva: null,
+      })
+      expect(isValid).toBeFalsy()
+      expect(sut.errors['campanhaAtiva']).toStrictEqual([
+        'campanhaAtiva must be a boolean value',
+        'campanhaAtiva should not be empty',
+      ])
+    })
+
     /*
     it('should return valid when campanhaAtiva is true', () => {
       const isValid = sut.validate({
@@ -494,6 +502,8 @@ describe('CampanhaValidator Unit tests', () => {
       })
       expect(isValid).toBeFalsy()
       expect(sut.errors['valorUnitarioBilhete']).toStrictEqual([
+        'valorUnitarioBilhete must not be less than 0',
+        'valorUnitarioBilhete must be a positive number',
         'valorUnitarioBilhete must be a number conforming to the specified constraints',
       ])
     })
@@ -527,6 +537,8 @@ describe('CampanhaValidator Unit tests', () => {
       expect(isValid).toBeFalsy()
       expect(sut.errors['valorUnitarioBilhete']).toStrictEqual([
         'valorUnitarioBilhete should not be empty',
+        'valorUnitarioBilhete must not be less than 0',
+        'valorUnitarioBilhete must be a positive number',
         'valorUnitarioBilhete must be a number conforming to the specified constraints',
       ])
     })

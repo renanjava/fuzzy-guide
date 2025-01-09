@@ -80,14 +80,6 @@ describe('CampanhaEntity integration tests', () => {
     it('should throw an error when creating a Campanha with invalid qtdBilhetesComprados', () => {
       let props: CampanhaProps = {
         ...CampanhaDataBuilder({}),
-        qtdBilhetesComprados: 0,
-      }
-      expect(() => new CampanhaEntity(props)).toThrowError(
-        EntityValidationError,
-      )
-
-      props = {
-        ...CampanhaDataBuilder({}),
         qtdBilhetesComprados: -10,
       }
       expect(() => new CampanhaEntity(props)).toThrowError(
@@ -226,5 +218,26 @@ describe('CampanhaEntity integration tests', () => {
       new CampanhaEntity(props)
     })
     */
+  })
+
+  describe('Update method', () => {
+    it('should throw an error when update a CampanhaAtiva with invalid value', () => {
+      const entity = new CampanhaEntity(CampanhaDataBuilder({}))
+
+      expect(() => entity.updateCampanhaAtiva('string' as any)).toThrowError(
+        EntityValidationError,
+      )
+      expect(() => entity.updateCampanhaAtiva(null)).toThrowError(
+        EntityValidationError,
+      )
+
+      /*
+      it('should a valid CampanhaAtiva update', () => {
+        expect.assertions(0)
+        const entity = new CampanhaEntity(CampanhaDataBuilder({}))
+        entity.updateCampanhaAtiva(false)
+      })
+        */
+    })
   })
 })
