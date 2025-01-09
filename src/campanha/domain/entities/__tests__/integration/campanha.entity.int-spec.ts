@@ -1,6 +1,8 @@
 import { CampanhaDataBuilder } from '@/campanha/domain/testing/helpers/campanha-data-builder'
 import { CampanhaEntity, CampanhaProps } from '../../campanha.entity'
 import { EntityValidationError } from '@/shared/domain/errors/validation-error'
+import { DomainRules } from '@/campanha/domain/common/domain.rules'
+import { DateRules } from '@/campanha/domain/common/date.rules'
 
 describe('CampanhaEntity integration tests', () => {
   describe('Constructor method', () => {
@@ -234,6 +236,104 @@ describe('CampanhaEntity integration tests', () => {
       expect.assertions(0)
       const entity = new CampanhaEntity(CampanhaDataBuilder({}))
       entity.updateCampanhaAtiva(false)
+    })
+
+    it('should throw an error when update a QtdBilhetesComprados with invalid value', () => {
+      const entity = new CampanhaEntity(CampanhaDataBuilder({}))
+
+      expect(() => entity.updateQtdBilhetesComprados(19.1)).toThrowError(
+        EntityValidationError,
+      )
+      expect(() =>
+        entity.updateQtdBilhetesComprados('string' as any),
+      ).toThrowError(EntityValidationError)
+      expect(() => entity.updateQtdBilhetesComprados(-200)).toThrowError(
+        EntityValidationError,
+      )
+      expect(() => entity.updateQtdBilhetesComprados(Infinity)).toThrowError(
+        EntityValidationError,
+      )
+      expect(() => entity.updateQtdBilhetesComprados(-Infinity)).toThrowError(
+        EntityValidationError,
+      )
+      expect(() => entity.updateQtdBilhetesComprados(NaN)).toThrowError(
+        EntityValidationError,
+      )
+      expect(() => entity.updateQtdBilhetesComprados(1000000)).toThrowError(
+        EntityValidationError,
+      )
+    })
+
+    it('should a valid QtdBilhetesComprados update', () => {
+      expect.assertions(0)
+
+      const entity = new CampanhaEntity(CampanhaDataBuilder({}))
+
+      entity.updateQtdBilhetesComprados(0)
+      entity.updateQtdBilhetesComprados(999999)
+    })
+
+    it('should throw an error when update a DataFimCampanha with invalid value', () => {
+      const entity = new CampanhaEntity(CampanhaDataBuilder({}))
+
+      expect(() =>
+        entity.updateDataFimCampanha(DateRules.YESTERDAY),
+      ).toThrowError(EntityValidationError)
+      expect(() => entity.updateDataFimCampanha(DateRules.TODAY)).toThrowError(
+        EntityValidationError,
+      )
+      expect(() =>
+        entity.updateDataFimCampanha('invalid-date' as any),
+      ).toThrowError(EntityValidationError)
+    })
+
+    it('should a valid DataFimCampanha update', () => {
+      expect.assertions(0)
+
+      const entity = new CampanhaEntity(CampanhaDataBuilder({}))
+
+      entity.updateDataFimCampanha(DateRules.TOMORROW)
+      entity.updateDataFimCampanha(null)
+    })
+
+    it('should throw an error when update a PorcentagemProgresso with invalid value', () => {
+      const entity = new CampanhaEntity(CampanhaDataBuilder({}))
+
+      expect(() =>
+        entity.updatePorcentagemProgresso(
+          DomainRules.MIN_PROGRESS_PERCENTAGE - 1,
+        ),
+      ).toThrowError(EntityValidationError)
+      expect(() =>
+        entity.updatePorcentagemProgresso(
+          DomainRules.MAX_PROGRESS_PERCENTAGE + 1,
+        ),
+      ).toThrowError(EntityValidationError)
+      expect(() =>
+        entity.updatePorcentagemProgresso('string' as any),
+      ).toThrowError(EntityValidationError)
+      expect(() => entity.updatePorcentagemProgresso(12.345)).toThrowError(
+        EntityValidationError,
+      )
+      expect(() => entity.updatePorcentagemProgresso(Infinity)).toThrowError(
+        EntityValidationError,
+      )
+      expect(() => entity.updatePorcentagemProgresso(-Infinity)).toThrowError(
+        EntityValidationError,
+      )
+      expect(() => entity.updatePorcentagemProgresso(NaN)).toThrowError(
+        EntityValidationError,
+      )
+    })
+
+    it('should a valid PorcentagemProgresso update', () => {
+      expect.assertions(0)
+
+      const entity = new CampanhaEntity(CampanhaDataBuilder({}))
+
+      entity.updatePorcentagemProgresso(DomainRules.MIN_PROGRESS_PERCENTAGE)
+      entity.updatePorcentagemProgresso(DomainRules.MAX_PROGRESS_PERCENTAGE)
+      entity.updatePorcentagemProgresso(50.0)
     })
   })
 })
