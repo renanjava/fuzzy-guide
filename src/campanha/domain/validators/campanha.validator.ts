@@ -14,7 +14,7 @@ import {
 import { CampanhaProps } from '../entities/campanha.entity'
 import { ClassValidatorFields } from '@/shared/domain/validators/class-validator-fields'
 import { DomainRules } from '../common/domain.rules'
-import { DateRules } from '../../../shared/domain/common/date.rules'
+import { DateRules } from '../../../shared/common/date.rules'
 
 export class CampanhaRules {
   @IsInt()

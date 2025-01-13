@@ -2,7 +2,7 @@ import { CampanhaDataBuilder } from '@/campanha/domain/testing/helpers/campanha-
 import { CampanhaEntity, CampanhaProps } from '../../campanha.entity'
 import { EntityValidationError } from '@/shared/domain/errors/validation-error'
 import { DomainRules } from '@/campanha/domain/common/domain.rules'
-import { DateRules } from '@/shared/domain/common/date.rules'
+import { DateRules } from '@/shared/common/date.rules'
 
 describe('CampanhaEntity integration tests', () => {
   describe('Constructor method', () => {

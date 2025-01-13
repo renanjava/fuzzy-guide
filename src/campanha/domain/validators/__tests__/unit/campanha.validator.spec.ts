@@ -4,7 +4,7 @@ import {
   CampanhaValidator,
   CampanhaValidatorFactory,
 } from '../../campanha.validator'
-import { DateRules } from '@/shared/domain/common/date.rules'
+import { DateRules } from '@/shared/common/date.rules'
 import { DomainRules } from '@/campanha/domain/common/domain.rules'
 import { CampanhaProps } from '@/campanha/domain/entities/campanha.entity'
 
