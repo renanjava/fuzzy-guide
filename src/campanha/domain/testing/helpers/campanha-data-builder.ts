@@ -17,7 +17,7 @@ export function CampanhaDataBuilder(props: Props): CampanhaProps {
     qtdBilhetesComprados:
       props.qtdBilhetesComprados ??
       faker.number.int({
-        min: DomainRules.MIN_BILHETES_TOTAIS,
+        min: DomainRules.MIN_BILHETES_COMPRADOS,
         max: DomainRules.MAX_BILHETES,
       }),
     dataInicioCampanha: props.dataInicioCampanha ?? new Date(),

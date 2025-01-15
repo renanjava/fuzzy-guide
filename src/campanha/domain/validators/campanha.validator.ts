@@ -18,7 +18,7 @@ import {
 import { CampanhaProps } from '../entities/campanha.entity'
 import { ClassValidatorFields } from '@/shared/domain/validators/class-validator-fields'
 import { DomainRules } from '../common/domain.rules'
-import { DateRules } from '../../../shared/common/date.rules'
+import { DateRules } from '@/shared/common/date.rules'
 
 export class CampanhaRules {
   @IsString()
@@ -99,7 +99,7 @@ export class CampanhaRules {
 }
 
 export class CampanhaValidator extends ClassValidatorFields<CampanhaRules> {
-  validate(props: CampanhaProps): boolean {
+  validate(props: CampanhaRules): boolean {
     return super.validate(new CampanhaRules(props ?? ({} as CampanhaProps)))
   }
 }

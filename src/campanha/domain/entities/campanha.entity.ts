@@ -102,6 +102,8 @@ export class CampanhaEntity extends Entity<CampanhaProps> {
     const validator = CampanhaValidatorFactory.create()
     const isValid = validator.validate(props)
     if (!isValid) {
+      console.log('motivo do erro:', props)
+      console.log('erros de validação:', validator.errors)
       throw new EntityValidationError(validator.errors)
     }
   }

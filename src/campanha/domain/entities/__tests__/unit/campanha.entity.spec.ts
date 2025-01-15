@@ -1,5 +1,6 @@
 import { CampanhaEntity, CampanhaProps } from '../../campanha.entity'
 import { CampanhaDataBuilder } from '@/campanha/domain/testing/helpers/campanha-data-builder'
+import { DateRules } from '@/shared/common/date.rules'
 
 describe('CampanhaEntity unit tests', () => {
   let props: CampanhaProps
@@ -101,14 +102,14 @@ describe('CampanhaEntity unit tests', () => {
   })
 
   it('setter dataFimCampanha', () => {
-    const prop = new Date()
+    const prop = DateRules.TOMORROW
     sut['dataFimCampanha'] = prop
     expect(sut.props.dataFimCampanha).toEqual(prop)
   })
 
   it('should update dataFimCampanha', () => {
     expect(CampanhaEntity.validate).toHaveBeenCalled()
-    const prop = new Date()
+    const prop = DateRules.TOMORROW
     sut.updateDataFimCampanha(prop)
     expect(sut.props.dataFimCampanha).toEqual(prop)
   })
