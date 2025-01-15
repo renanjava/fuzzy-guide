@@ -6,8 +6,8 @@ type Props = Partial<CampanhaProps>
 
 export function CampanhaDataBuilder(props: Props): CampanhaProps {
   return {
-    titulo: props.titulo ?? 'Campanha Teste', // Valor fixo
-    descricao: props.descricao ?? 'Descrição padrão de teste', // Valor fixo
+    titulo: props.titulo ?? 'Campanha Teste',
+    descricao: props.descricao ?? 'Descrição padrão de teste',
     qtdBilhetesTotais:
       props.qtdBilhetesTotais ??
       faker.number.int({
@@ -22,9 +22,8 @@ export function CampanhaDataBuilder(props: Props): CampanhaProps {
       }),
     dataInicioCampanha: props.dataInicioCampanha ?? new Date(),
     dataFimCampanha: props.dataFimCampanha ?? null,
-    porcentagemProgresso: props.porcentagemProgresso ?? 50, // Valor fixo para testar
+    porcentagemProgresso: props.porcentagemProgresso ?? 50,
     campanhaAtiva: props.campanhaAtiva ?? true,
-    valorUnitarioBilhete:
-      props.valorUnitarioBilhete ?? 10.0, // Valor fixo para testar
+    valorUnitarioBilhete: props.valorUnitarioBilhete ?? 10.0,
   }
 }
