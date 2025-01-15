@@ -11,6 +11,11 @@ describe('CampanhaEntity unit tests', () => {
     props = CampanhaDataBuilder({})
     sut = new CampanhaEntity(props)
   })
+
+  afterEach(() => {
+    jest.clearAllMocks()
+  })
+
   it('constructor method', () => {
     expect(CampanhaEntity.validate).toHaveBeenCalled()
     expect(sut.props.titulo).toEqual(props.titulo)

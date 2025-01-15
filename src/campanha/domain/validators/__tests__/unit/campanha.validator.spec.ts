@@ -19,7 +19,7 @@ describe('CampanhaValidator Unit tests', () => {
   describe('Titulo Field', () => {
     it('should return false and specific errors when titulo is less than 4 characters', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         titulo: 'abc',
       })
       expect(isValid).toBeFalsy()
@@ -30,7 +30,7 @@ describe('CampanhaValidator Unit tests', () => {
 
     it('should return false and specific errors when titulo exceeds 40 characters', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         titulo: 'a'.repeat(41),
       })
       expect(isValid).toBeFalsy()
@@ -41,7 +41,7 @@ describe('CampanhaValidator Unit tests', () => {
 
     it('should return false and specific errors when titulo contains invalid characters', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         titulo: 'Titulo@Invalido!',
       })
       expect(isValid).toBeFalsy()
@@ -52,7 +52,7 @@ describe('CampanhaValidator Unit tests', () => {
 
     it('should return false and specific errors when titulo is empty', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         titulo: '',
       })
       expect(isValid).toBeFalsy()
@@ -65,7 +65,7 @@ describe('CampanhaValidator Unit tests', () => {
 
     it('should return false and specific errors when titulo is not a string', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         titulo: 123 as any,
       })
       expect(isValid).toBeFalsy()
@@ -79,7 +79,7 @@ describe('CampanhaValidator Unit tests', () => {
 
     it('should return false and specific errors when titulo is null', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         titulo: null,
       })
       expect(isValid).toBeFalsy()
@@ -132,7 +132,7 @@ describe('CampanhaValidator Unit tests', () => {
   describe('Descricao Field', () => {
     it('should return false and specific errors when descricao is less than 6 characters', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         descricao: 'abcde',
       })
       expect(isValid).toBeFalsy()
@@ -143,7 +143,7 @@ describe('CampanhaValidator Unit tests', () => {
 
     it('should return false and specific errors when descricao exceeds 255 characters', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         descricao: 'a'.repeat(256),
       })
       expect(isValid).toBeFalsy()
@@ -154,7 +154,7 @@ describe('CampanhaValidator Unit tests', () => {
 
     it('should return false and specific errors when descricao is empty', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         descricao: '',
       })
       expect(isValid).toBeFalsy()
@@ -166,7 +166,7 @@ describe('CampanhaValidator Unit tests', () => {
 
     it('should return false and specific errors when descricao is not a string', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         descricao: 123 as any,
       })
       expect(isValid).toBeFalsy()
@@ -179,7 +179,7 @@ describe('CampanhaValidator Unit tests', () => {
 
     it('should return false and specific errors when descricao is null', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         descricao: null,
       })
       expect(isValid).toBeFalsy()
@@ -231,7 +231,7 @@ describe('CampanhaValidator Unit tests', () => {
   describe('QtdBilhetesTotais Field', () => {
     it('should return false and specific errors when qtdBilhetesTotais is less than 10', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         qtdBilhetesTotais: 7,
       })
       expect(isValid).toBeFalsy()
@@ -242,7 +242,7 @@ describe('CampanhaValidator Unit tests', () => {
 
     it('should return false and specific errors when qtdBilhetesTotais is NaN', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         qtdBilhetesTotais: NaN,
       })
       expect(isValid).toBeFalsy()
@@ -256,7 +256,7 @@ describe('CampanhaValidator Unit tests', () => {
 
     it('should return false and specific errors when qtdBilhetesTotais is Infinity', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         qtdBilhetesTotais: Infinity,
       })
       expect(isValid).toBeFalsy()
@@ -268,7 +268,7 @@ describe('CampanhaValidator Unit tests', () => {
 
     it('should return false and specific errors when qtdBilhetesTotais is -Infinity', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         qtdBilhetesTotais: -Infinity,
       })
       expect(isValid).toBeFalsy()
@@ -281,7 +281,7 @@ describe('CampanhaValidator Unit tests', () => {
 
     it('should return false and specific errors when qtdBilhetesTotais is a decimal', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         qtdBilhetesTotais: 19.1,
       })
       expect(isValid).toBeFalsy()
@@ -292,7 +292,7 @@ describe('CampanhaValidator Unit tests', () => {
 
     it('should return false and specific errors when qtdBilhetesTotais is a negative number', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         qtdBilhetesTotais: -200,
       })
       expect(isValid).toBeFalsy()
@@ -304,7 +304,7 @@ describe('CampanhaValidator Unit tests', () => {
 
     it('should return false and specific errors when qtdBilhetesTotais is a string', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         qtdBilhetesTotais: 'string' as any,
       })
       expect(isValid).toBeFalsy()
@@ -318,7 +318,7 @@ describe('CampanhaValidator Unit tests', () => {
 
     it('should return false and specific errors when qtdBilhetesTotais is null', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         qtdBilhetesTotais: null,
       })
       expect(isValid).toBeFalsy()
@@ -332,7 +332,7 @@ describe('CampanhaValidator Unit tests', () => {
 
     it('should return false and specific errors when qtdBilhetesTotais is more than 999999', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         qtdBilhetesTotais: 1000000,
       })
       expect(isValid).toBeFalsy()
@@ -367,7 +367,7 @@ describe('CampanhaValidator Unit tests', () => {
   describe('QtdBilhetesComprados Field', () => {
     it('should return false and specific errors when qtdBilhetesComprados is a decimal', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         qtdBilhetesComprados: 19.1,
       })
       expect(isValid).toBeFalsy()
@@ -378,7 +378,7 @@ describe('CampanhaValidator Unit tests', () => {
 
     it('should return false and specific errors when qtdBilhetesComprados is a string', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         qtdBilhetesComprados: 'string' as any,
       })
       expect(isValid).toBeFalsy()
@@ -391,7 +391,7 @@ describe('CampanhaValidator Unit tests', () => {
 
     it('should return false and specific errors when qtdBilhetesComprados is a negative number', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         qtdBilhetesComprados: -200,
       })
       expect(isValid).toBeFalsy()
@@ -402,7 +402,7 @@ describe('CampanhaValidator Unit tests', () => {
 
     it('should return false and specific errors when qtdBilhetesComprados is Infinity', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         qtdBilhetesComprados: Infinity,
       })
       expect(isValid).toBeFalsy()
@@ -414,7 +414,7 @@ describe('CampanhaValidator Unit tests', () => {
 
     it('should return false and specific errors when qtdBilhetesComprados is -Infinity', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         qtdBilhetesComprados: -Infinity,
       })
       expect(isValid).toBeFalsy()
@@ -426,7 +426,7 @@ describe('CampanhaValidator Unit tests', () => {
 
     it('should return false and specific errors when qtdBilhetesComprados is NaN', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         qtdBilhetesComprados: NaN,
       })
       expect(isValid).toBeFalsy()
@@ -439,7 +439,7 @@ describe('CampanhaValidator Unit tests', () => {
 
     it('should return false and specific errors when qtdBilhetesComprados is more than 999999', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         qtdBilhetesComprados: 1000000,
       })
       expect(isValid).toBeFalsy()
@@ -480,7 +480,7 @@ describe('CampanhaValidator Unit tests', () => {
   describe('DataInicioCampanha Field', () => {
     it('should return error when dataInicioCampanha is a past date', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         dataInicioCampanha: DateRules.YESTERDAY,
       })
       expect(isValid).toBeFalsy()
@@ -491,7 +491,7 @@ describe('CampanhaValidator Unit tests', () => {
 
     it('should return error when dataInicioCampanha is a future date', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         dataInicioCampanha: DateRules.TOMORROW,
       })
       expect(isValid).toBeFalsy()
@@ -502,7 +502,7 @@ describe('CampanhaValidator Unit tests', () => {
 
     it('should return error when dataInicioCampanha is an invalid date', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         dataInicioCampanha: 'invalid-date' as any,
       })
       expect(isValid).toBeFalsy()
@@ -515,7 +515,7 @@ describe('CampanhaValidator Unit tests', () => {
 
     it('should return error when dataInicioCampanha is null', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         dataInicioCampanha: null as any,
       })
       expect(isValid).toBeFalsy()
@@ -542,7 +542,7 @@ describe('CampanhaValidator Unit tests', () => {
   describe('DataFimCampanha Field', () => {
     it('should return error when dataFimCampanha is yesterday', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         dataFimCampanha: DateRules.YESTERDAY,
       })
       expect(isValid).toBeFalsy()
@@ -553,7 +553,7 @@ describe('CampanhaValidator Unit tests', () => {
 
     it('should return error when dataFimCampanha is today', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         dataFimCampanha: DateRules.TODAY,
       })
       expect(isValid).toBeFalsy()
@@ -564,7 +564,7 @@ describe('CampanhaValidator Unit tests', () => {
 
     it('should return error when dataFimCampanha is an invalid date', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         dataFimCampanha: 'invalid-date' as any,
       })
       expect(isValid).toBeFalsy()
@@ -599,7 +599,7 @@ describe('CampanhaValidator Unit tests', () => {
   describe('PorcentagemProgresso Field', () => {
     it('should return error when porcentagemProgresso is below the minimum value', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         porcentagemProgresso: DomainRules.MIN_PROGRESS_PERCENTAGE - 1,
       })
       expect(isValid).toBeFalsy()
@@ -610,7 +610,7 @@ describe('CampanhaValidator Unit tests', () => {
 
     it('should return error when porcentagemProgresso is above the maximum value', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         porcentagemProgresso: DomainRules.MAX_PROGRESS_PERCENTAGE + 1,
       })
       expect(isValid).toBeFalsy()
@@ -621,7 +621,7 @@ describe('CampanhaValidator Unit tests', () => {
 
     it('should return error when porcentagemProgresso is not a number', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         porcentagemProgresso: 'string' as any,
       })
       expect(isValid).toBeFalsy()
@@ -634,7 +634,7 @@ describe('CampanhaValidator Unit tests', () => {
 
     it('should return error when porcentagemProgresso has more than 2 decimal places', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         porcentagemProgresso: 12.345,
       })
       expect(isValid).toBeFalsy()
@@ -660,7 +660,7 @@ describe('CampanhaValidator Unit tests', () => {
   describe('CampanhaAtiva Field', () => {
     it('should return error when campanhaAtiva is not a boolean', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         campanhaAtiva: 'true' as any,
       })
       expect(isValid).toBeFalsy()
@@ -671,7 +671,7 @@ describe('CampanhaValidator Unit tests', () => {
 
     it('should return error when campanhaAtiva is null', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         campanhaAtiva: null,
       })
       expect(isValid).toBeFalsy()
@@ -713,7 +713,7 @@ describe('CampanhaValidator Unit tests', () => {
   describe('ValorUnitarioBilhete Field', () => {
     it('should return error when valorUnitarioBilhete is not a number', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         valorUnitarioBilhete: 'string' as any,
       })
       expect(isValid).toBeFalsy()
@@ -726,7 +726,7 @@ describe('CampanhaValidator Unit tests', () => {
 
     it('should return error when valorUnitarioBilhete has more than 2 decimal places', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         valorUnitarioBilhete: 12.345,
       })
       expect(isValid).toBeFalsy()
@@ -750,7 +750,7 @@ describe('CampanhaValidator Unit tests', () => {
     })
     it('should return error when valorUnitarioBilhete is empty', () => {
       const isValid = sut.validate({
-        ...CampanhaDataBuilder({}),
+        ...props,
         valorUnitarioBilhete: null as any,
       })
       expect(isValid).toBeFalsy()

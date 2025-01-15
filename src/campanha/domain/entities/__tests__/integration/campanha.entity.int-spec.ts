@@ -7,304 +7,239 @@ import { DateRules } from '@/shared/common/date.rules'
 describe('CampanhaEntity integration tests', () => {
   describe('Constructor method', () => {
     it('should throw an error when creating a Campanha with invalid Titulo', () => {
-      let props: CampanhaProps = {
+      const props: CampanhaProps = {
         ...CampanhaDataBuilder({}),
-        titulo: 'abc',
       }
-      expect(() => new CampanhaEntity(props)).toThrowError(
-        EntityValidationError,
-      )
+      expect(
+        () => new CampanhaEntity({ ...props, titulo: 'abc' }),
+      ).toThrowError(EntityValidationError)
 
-      props = {
-        ...CampanhaDataBuilder({}),
-        titulo: 'a'.repeat(41),
-      }
-      expect(() => new CampanhaEntity(props)).toThrowError(
-        EntityValidationError,
-      )
+      expect(
+        () =>
+          new CampanhaEntity({
+            ...props,
+            titulo: 'a'.repeat(41),
+          }),
+      ).toThrowError(EntityValidationError)
 
-      props = {
-        ...CampanhaDataBuilder({}),
-        titulo: 'Titulo@Invalido!',
-      }
-      expect(() => new CampanhaEntity(props)).toThrowError(
-        EntityValidationError,
-      )
+      expect(
+        () =>
+          new CampanhaEntity({
+            ...props,
+            titulo: 'Titulo@Invalido!',
+          }),
+      ).toThrowError(EntityValidationError)
 
-      props = {
-        ...CampanhaDataBuilder({}),
-        titulo: '',
-      }
-      expect(() => new CampanhaEntity(props)).toThrowError(
-        EntityValidationError,
-      )
+      expect(
+        () =>
+          new CampanhaEntity({
+            ...props,
+            titulo: '',
+          }),
+      ).toThrowError(EntityValidationError)
 
-      props = {
-        ...CampanhaDataBuilder({}),
-        titulo: 123 as any,
-      }
-      expect(() => new CampanhaEntity(props)).toThrowError(
-        EntityValidationError,
-      )
+      expect(
+        () =>
+          new CampanhaEntity({
+            ...props,
+            titulo: 123 as any,
+          }),
+      ).toThrowError(EntityValidationError)
 
-      props = {
-        ...CampanhaDataBuilder({}),
-        titulo: null,
-      }
-      expect(() => new CampanhaEntity(props)).toThrowError(
-        EntityValidationError,
-      )
+      expect(
+        () =>
+          new CampanhaEntity({
+            ...props,
+            titulo: null,
+          }),
+      ).toThrowError(EntityValidationError)
     })
 
-    it('should throw an error when creating a Campanha with invalid Descricao', () => {
-      let props: CampanhaProps = {
-        ...CampanhaDataBuilder({}),
-        descricao: 'abcde',
-      }
-      expect(() => new CampanhaEntity(props)).toThrowError(
-        EntityValidationError,
-      )
+    describe('Constructor method', () => {
+      it('should throw an error when creating a Campanha with invalid Descricao', () => {
+        const props: CampanhaProps = {
+          ...CampanhaDataBuilder({}),
+        }
 
-      props = {
-        ...CampanhaDataBuilder({}),
-        descricao: 'a'.repeat(256),
-      }
-      expect(() => new CampanhaEntity(props)).toThrowError(
-        EntityValidationError,
-      )
+        expect(
+          () => new CampanhaEntity({ ...props, descricao: 'abcde' }),
+        ).toThrowError(EntityValidationError)
+        expect(
+          () => new CampanhaEntity({ ...props, descricao: 'a'.repeat(256) }),
+        ).toThrowError(EntityValidationError)
+        expect(
+          () => new CampanhaEntity({ ...props, descricao: '' }),
+        ).toThrowError(EntityValidationError)
+        expect(
+          () => new CampanhaEntity({ ...props, descricao: 123 as any }),
+        ).toThrowError(EntityValidationError)
+        expect(
+          () => new CampanhaEntity({ ...props, descricao: null }),
+        ).toThrowError(EntityValidationError)
+      })
 
-      props = {
-        ...CampanhaDataBuilder({}),
-        descricao: '',
-      }
-      expect(() => new CampanhaEntity(props)).toThrowError(
-        EntityValidationError,
-      )
+      it('should throw an error when creating a Campanha with invalid qtdBilhetesTotais', () => {
+        const props: CampanhaProps = {
+          ...CampanhaDataBuilder({}),
+        }
 
-      props = {
-        ...CampanhaDataBuilder({}),
-        descricao: 123 as any,
-      }
-      expect(() => new CampanhaEntity(props)).toThrowError(
-        EntityValidationError,
-      )
+        expect(
+          () => new CampanhaEntity({ ...props, qtdBilhetesTotais: 5 }),
+        ).toThrowError(EntityValidationError)
+        expect(
+          () => new CampanhaEntity({ ...props, qtdBilhetesTotais: 1000000 }),
+        ).toThrowError(EntityValidationError)
+        expect(
+          () => new CampanhaEntity({ ...props, qtdBilhetesTotais: -20 }),
+        ).toThrowError(EntityValidationError)
+        expect(
+          () => new CampanhaEntity({ ...props, qtdBilhetesTotais: 166.1 }),
+        ).toThrowError(EntityValidationError)
+        expect(
+          () =>
+            new CampanhaEntity({
+              ...props,
+              qtdBilhetesTotais: 'string' as any,
+            }),
+        ).toThrowError(EntityValidationError)
+        expect(
+          () => new CampanhaEntity({ ...props, qtdBilhetesTotais: Infinity }),
+        ).toThrowError(EntityValidationError)
+        expect(
+          () => new CampanhaEntity({ ...props, qtdBilhetesTotais: -Infinity }),
+        ).toThrowError(EntityValidationError)
+        expect(
+          () => new CampanhaEntity({ ...props, qtdBilhetesTotais: NaN }),
+        ).toThrowError(EntityValidationError)
+        expect(
+          () => new CampanhaEntity({ ...props, qtdBilhetesTotais: null }),
+        ).toThrowError(EntityValidationError)
+      })
 
-      props = {
-        ...CampanhaDataBuilder({}),
-        descricao: null,
-      }
-      expect(() => new CampanhaEntity(props)).toThrowError(
-        EntityValidationError,
-      )
-    })
+      it('should throw an error when creating a Campanha with invalid qtdBilhetesComprados', () => {
+        const props: CampanhaProps = {
+          ...CampanhaDataBuilder({}),
+        }
 
-    it('should throw an error when creating a Campanha with invalid qtdBilhetesTotais', () => {
-      let props: CampanhaProps = {
-        ...CampanhaDataBuilder({}),
-        qtdBilhetesTotais: 5,
-      }
-      expect(() => new CampanhaEntity(props)).toThrowError(
-        EntityValidationError,
-      )
-
-      props = {
-        ...CampanhaDataBuilder({}),
-        qtdBilhetesTotais: 1000000,
-      }
-      expect(() => new CampanhaEntity(props)).toThrowError(
-        EntityValidationError,
-      )
-
-      props = {
-        ...CampanhaDataBuilder({}),
-        qtdBilhetesTotais: -20,
-      }
-      expect(() => new CampanhaEntity(props)).toThrowError(
-        EntityValidationError,
-      )
-
-      props = {
-        ...CampanhaDataBuilder({}),
-        qtdBilhetesTotais: 166.1,
-      }
-      expect(() => new CampanhaEntity(props)).toThrowError(
-        EntityValidationError,
-      )
-
-      props = {
-        ...CampanhaDataBuilder({}),
-        qtdBilhetesTotais: 'string' as any,
-      }
-      expect(() => new CampanhaEntity(props)).toThrowError(
-        EntityValidationError,
-      )
-
-      props = {
-        ...CampanhaDataBuilder({}),
-        qtdBilhetesTotais: Infinity,
-      }
-      expect(() => new CampanhaEntity(props)).toThrowError(
-        EntityValidationError,
-      )
-
-      props = {
-        ...CampanhaDataBuilder({}),
-        qtdBilhetesTotais: -Infinity,
-      }
-      expect(() => new CampanhaEntity(props)).toThrowError(
-        EntityValidationError,
-      )
-
-      props = {
-        ...CampanhaDataBuilder({}),
-        qtdBilhetesTotais: NaN,
-      }
-      expect(() => new CampanhaEntity(props)).toThrowError(
-        EntityValidationError,
-      )
-
-      props = {
-        ...CampanhaDataBuilder({}),
-        qtdBilhetesTotais: null,
-      }
-      expect(() => new CampanhaEntity(props)).toThrowError(
-        EntityValidationError,
-      )
-    })
-
-    it('should throw an error when creating a Campanha with invalid qtdBilhetesComprados', () => {
-      let props: CampanhaProps = {
-        ...CampanhaDataBuilder({}),
-        qtdBilhetesComprados: -10,
-      }
-      expect(() => new CampanhaEntity(props)).toThrowError(
-        EntityValidationError,
-      )
-
-      props = {
-        ...CampanhaDataBuilder({}),
-        qtdBilhetesComprados: 1000000,
-      }
-      expect(() => new CampanhaEntity(props)).toThrowError(
-        EntityValidationError,
-      )
-
-      props = {
-        ...CampanhaDataBuilder({}),
-        qtdBilhetesComprados: 'string' as any,
-      }
-      expect(() => new CampanhaEntity(props)).toThrowError(
-        EntityValidationError,
-      )
+        expect(
+          () => new CampanhaEntity({ ...props, qtdBilhetesComprados: -10 }),
+        ).toThrowError(EntityValidationError)
+        expect(
+          () => new CampanhaEntity({ ...props, qtdBilhetesComprados: 1000000 }),
+        ).toThrowError(EntityValidationError)
+        expect(
+          () =>
+            new CampanhaEntity({
+              ...props,
+              qtdBilhetesComprados: 'string' as any,
+            }),
+        ).toThrowError(EntityValidationError)
+      })
     })
 
     it('should throw an error when creating a Campanha with invalid dataInicioCampanha', () => {
-      let props: CampanhaProps = {
+      const props: CampanhaProps = {
         ...CampanhaDataBuilder({}),
-        dataInicioCampanha: 'invalid-date' as any,
       }
-      expect(() => new CampanhaEntity(props)).toThrowError(
-        EntityValidationError,
-      )
 
-      props = {
-        ...CampanhaDataBuilder({}),
-        dataInicioCampanha: Date.parse('01/01/2000') as any,
-      }
-      expect(() => new CampanhaEntity(props)).toThrowError(
-        EntityValidationError,
-      )
+      expect(
+        () =>
+          new CampanhaEntity({
+            ...props,
+            dataInicioCampanha: 'invalid-date' as any,
+          }),
+      ).toThrowError(EntityValidationError)
+
+      expect(
+        () =>
+          new CampanhaEntity({
+            ...props,
+            dataInicioCampanha: Date.parse('01/01/2000') as any,
+          }),
+      ).toThrowError(EntityValidationError)
     })
 
     it('should throw an error when creating a Campanha with invalid dataFimCampanha', () => {
-      let props: CampanhaProps = {
+      const props: CampanhaProps = {
         ...CampanhaDataBuilder({}),
-        dataFimCampanha: 'invalid-date' as any,
       }
-      expect(() => new CampanhaEntity(props)).toThrowError(
-        EntityValidationError,
-      )
 
-      props = {
-        ...CampanhaDataBuilder({}),
-        dataFimCampanha: Date.parse('01/01/2000') as any,
-      }
-      expect(() => new CampanhaEntity(props)).toThrowError(
-        EntityValidationError,
-      )
+      expect(
+        () =>
+          new CampanhaEntity({
+            ...props,
+            dataFimCampanha: 'invalid-date' as any,
+          }),
+      ).toThrowError(EntityValidationError)
+
+      expect(
+        () =>
+          new CampanhaEntity({
+            ...props,
+            dataFimCampanha: Date.parse('01/01/2000') as any,
+          }),
+      ).toThrowError(EntityValidationError)
     })
 
     it('should throw an error when creating a Campanha with invalid porcentagemProgresso', () => {
-      let props: CampanhaProps = {
+      const props: CampanhaProps = {
         ...CampanhaDataBuilder({}),
-        porcentagemProgresso: -10,
       }
-      expect(() => new CampanhaEntity(props)).toThrowError(
-        EntityValidationError,
-      )
 
-      props = {
-        ...CampanhaDataBuilder({}),
-        porcentagemProgresso: 110,
-      }
-      expect(() => new CampanhaEntity(props)).toThrowError(
-        EntityValidationError,
-      )
+      expect(
+        () => new CampanhaEntity({ ...props, porcentagemProgresso: -10 }),
+      ).toThrowError(EntityValidationError)
 
-      props = {
-        ...CampanhaDataBuilder({}),
-        porcentagemProgresso: 'invalid' as any,
-      }
-      expect(() => new CampanhaEntity(props)).toThrowError(
-        EntityValidationError,
-      )
+      expect(
+        () => new CampanhaEntity({ ...props, porcentagemProgresso: 110 }),
+      ).toThrowError(EntityValidationError)
+
+      expect(
+        () =>
+          new CampanhaEntity({
+            ...props,
+            porcentagemProgresso: 'invalid' as any,
+          }),
+      ).toThrowError(EntityValidationError)
     })
 
     it('should throw an error when creating a Campanha with invalid campanhaAtiva', () => {
-      let props: CampanhaProps = {
+      const props: CampanhaProps = {
         ...CampanhaDataBuilder({}),
-        campanhaAtiva: 'invalid' as any,
       }
-      expect(() => new CampanhaEntity(props)).toThrowError(
-        EntityValidationError,
-      )
 
-      props = {
-        ...CampanhaDataBuilder({}),
-        campanhaAtiva: null,
-      }
-      expect(() => new CampanhaEntity(props)).toThrowError(
-        EntityValidationError,
-      )
+      expect(
+        () => new CampanhaEntity({ ...props, campanhaAtiva: 'invalid' as any }),
+      ).toThrowError(EntityValidationError)
+
+      expect(
+        () => new CampanhaEntity({ ...props, campanhaAtiva: null }),
+      ).toThrowError(EntityValidationError)
     })
 
     it('should throw an error when creating a Campanha with invalid valorUnitarioBilhete', () => {
-      let props: CampanhaProps = {
+      const props: CampanhaProps = {
         ...CampanhaDataBuilder({}),
-        valorUnitarioBilhete: -1,
       }
-      expect(() => new CampanhaEntity(props)).toThrowError(
-        EntityValidationError,
-      )
 
-      props = {
-        ...CampanhaDataBuilder({}),
-        valorUnitarioBilhete: 'invalid' as any,
-      }
-      expect(() => new CampanhaEntity(props)).toThrowError(
-        EntityValidationError,
-      )
+      expect(
+        () => new CampanhaEntity({ ...props, valorUnitarioBilhete: -1 }),
+      ).toThrowError(EntityValidationError)
 
-      props = {
-        ...CampanhaDataBuilder({}),
-        valorUnitarioBilhete: null,
-      }
-      expect(() => new CampanhaEntity(props)).toThrowError(
-        EntityValidationError,
-      )
+      expect(
+        () =>
+          new CampanhaEntity({
+            ...props,
+            valorUnitarioBilhete: 'invalid' as any,
+          }),
+      ).toThrowError(EntityValidationError)
+
+      expect(
+        () => new CampanhaEntity({ ...props, valorUnitarioBilhete: null }),
+      ).toThrowError(EntityValidationError)
     })
 
-    it('should a valid Campanha', () => {
+    it('should create a valid Campanha', () => {
       expect.assertions(0)
       const props: CampanhaProps = {
         ...CampanhaDataBuilder({}),

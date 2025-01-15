@@ -6,6 +6,9 @@ class StubClassValidatorFields extends ClassValidatorFields<{
 }> {}
 
 describe('ClassValidatorFields unit tests', () => {
+  afterEach(() => {
+    jest.clearAllMocks()
+  })
   it('should initialize errors and validatedData variables with null', () => {
     const sut = new StubClassValidatorFields()
 
