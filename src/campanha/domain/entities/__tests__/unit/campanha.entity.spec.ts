@@ -18,7 +18,7 @@ describe('CampanhaEntity unit tests', () => {
     expect(sut.props.dataInicioCampanha).toEqual(props.dataInicioCampanha)
     expect(sut.props.campanhaAtiva).toEqual(props.campanhaAtiva)
     expect(sut.props.valorUnitarioBilhete).toEqual(props.valorUnitarioBilhete)
-    expect(sut.props.qtdBilhetesComprados).toEqual(0)
+    expect(sut.props.qtdBilhetesComprados).toEqual(props.qtdBilhetesComprados)
     expect(sut.props.dataFimCampanha).toBeNull()
     expect(sut.props.porcentagemProgresso).toEqual(0)
   })
@@ -76,7 +76,7 @@ describe('CampanhaEntity unit tests', () => {
   })
 
   it('getter qtdBilhetesComprados', () => {
-    expect(sut.qtdBilhetesComprados).toEqual(0)
+    expect(sut.qtdBilhetesComprados).toEqual(props.qtdBilhetesComprados)
     expect(sut.props.qtdBilhetesComprados).toBeDefined()
     expect(sut.props.qtdBilhetesComprados).toEqual(props.qtdBilhetesComprados)
     expect(typeof sut.props.qtdBilhetesComprados).toBe('number')
