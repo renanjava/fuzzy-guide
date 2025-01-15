@@ -69,7 +69,8 @@ export class CampanhaRules {
 
   @IsNumber({ allowInfinity: false, allowNaN: false, maxDecimalPlaces: 2 })
   @IsPositive()
-  @Min(0)
+  @Min(DomainRules.MIN_VALOR_BILHETES)
+  @Max(DomainRules.MAX_VALOR_BILHETES)
   @IsNotEmpty()
   valorUnitarioBilhete: number
 

@@ -24,6 +24,12 @@ export function CampanhaDataBuilder(props: Props): CampanhaProps {
     dataFimCampanha: props.dataFimCampanha ?? null,
     porcentagemProgresso: props.porcentagemProgresso ?? 50,
     campanhaAtiva: props.campanhaAtiva ?? true,
-    valorUnitarioBilhete: props.valorUnitarioBilhete ?? 10.0,
+    valorUnitarioBilhete:
+      props.valorUnitarioBilhete ??
+      faker.number.float({
+        min: DomainRules.MIN_VALOR_BILHETES,
+        max: DomainRules.MAX_VALOR_BILHETES,
+        fractionDigits: 2,
+      }),
   }
 }

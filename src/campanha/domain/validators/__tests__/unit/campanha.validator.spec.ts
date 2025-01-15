@@ -718,7 +718,8 @@ describe('CampanhaValidator Unit tests', () => {
       })
       expect(isValid).toBeFalsy()
       expect(sut.errors['valorUnitarioBilhete']).toStrictEqual([
-        'valorUnitarioBilhete must not be less than 0',
+        `valorUnitarioBilhete must not be greater than ${DomainRules.MAX_VALOR_BILHETES}`,
+        `valorUnitarioBilhete must not be less than ${DomainRules.MIN_VALOR_BILHETES}`,
         'valorUnitarioBilhete must be a positive number',
         'valorUnitarioBilhete must be a number conforming to the specified constraints',
       ])
@@ -756,7 +757,8 @@ describe('CampanhaValidator Unit tests', () => {
       expect(isValid).toBeFalsy()
       expect(sut.errors['valorUnitarioBilhete']).toStrictEqual([
         'valorUnitarioBilhete should not be empty',
-        'valorUnitarioBilhete must not be less than 0',
+        `valorUnitarioBilhete must not be greater than ${DomainRules.MAX_VALOR_BILHETES}`,
+        `valorUnitarioBilhete must not be less than ${DomainRules.MIN_VALOR_BILHETES}`,
         'valorUnitarioBilhete must be a positive number',
         'valorUnitarioBilhete must be a number conforming to the specified constraints',
       ])

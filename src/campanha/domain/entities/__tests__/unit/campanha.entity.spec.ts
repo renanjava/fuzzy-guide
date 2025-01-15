@@ -133,7 +133,7 @@ describe('CampanhaEntity unit tests', () => {
 
   it('should update porcentagemProgresso', () => {
     expect(CampanhaEntity.validate).toHaveBeenCalled()
-    sut.updatePorcentagemProgresso(250)
-    expect(sut.props.porcentagemProgresso).toEqual(250)
+    sut.updatePorcentagemProgresso(25.0)
+    expect(sut.props.porcentagemProgresso).toEqual(25.0)
   })
 })
