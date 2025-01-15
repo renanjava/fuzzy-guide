@@ -3,6 +3,8 @@ import { CampanhaValidatorFactory } from '../validators/campanha.validator'
 import { EntityValidationError } from '@/shared/domain/errors/validation-error'
 
 export type CampanhaProps = {
+  titulo: string
+  descricao: string
   qtdBilhetesTotais: number
   qtdBilhetesComprados?: number
   dataInicioCampanha: Date
@@ -42,6 +44,14 @@ export class CampanhaEntity extends Entity<CampanhaProps> {
   updateCampanhaAtiva(value: boolean): void {
     CampanhaEntity.validate({ ...this.props, campanhaAtiva: value })
     this.campanhaAtiva = value
+  }
+
+  get titulo(): string {
+    return this.props.titulo
+  }
+
+  get descricao(): string {
+    return this.props.descricao
   }
 
   get qtdBilhetesTotais(): number {

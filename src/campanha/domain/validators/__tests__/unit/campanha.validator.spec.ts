@@ -16,6 +16,218 @@ describe('CampanhaValidator Unit tests', () => {
     props = CampanhaDataBuilder({})
   })
 
+  describe('Titulo Field', () => {
+    it('should return false and specific errors when titulo is less than 4 characters', () => {
+      const isValid = sut.validate({
+        ...CampanhaDataBuilder({}),
+        titulo: 'abc',
+      })
+      expect(isValid).toBeFalsy()
+      expect(sut.errors['titulo']).toStrictEqual([
+        'titulo must be longer than or equal to 4 characters',
+      ])
+    })
+
+    it('should return false and specific errors when titulo exceeds 40 characters', () => {
+      const isValid = sut.validate({
+        ...CampanhaDataBuilder({}),
+        titulo: 'a'.repeat(41),
+      })
+      expect(isValid).toBeFalsy()
+      expect(sut.errors['titulo']).toStrictEqual([
+        'titulo must be shorter than or equal to 40 characters',
+      ])
+    })
+
+    it('should return false and specific errors when titulo contains invalid characters', () => {
+      const isValid = sut.validate({
+        ...CampanhaDataBuilder({}),
+        titulo: 'Titulo@Invalido!',
+      })
+      expect(isValid).toBeFalsy()
+      expect(sut.errors['titulo']).toStrictEqual([
+        'titulo must match /^[a-zA-Z0-9\\s]+$/ regular expression',
+      ])
+    })
+
+    it('should return false and specific errors when titulo is empty', () => {
+      const isValid = sut.validate({
+        ...CampanhaDataBuilder({}),
+        titulo: '',
+      })
+      expect(isValid).toBeFalsy()
+      expect(sut.errors['titulo']).toStrictEqual([
+        'titulo should not be empty',
+        'titulo must be longer than or equal to 4 characters',
+        'titulo must match /^[a-zA-Z0-9\\s]+$/ regular expression',
+      ])
+    })
+
+    it('should return false and specific errors when titulo is not a string', () => {
+      const isValid = sut.validate({
+        ...CampanhaDataBuilder({}),
+        titulo: 123 as any,
+      })
+      expect(isValid).toBeFalsy()
+      expect(sut.errors['titulo']).toStrictEqual([
+        'titulo must be shorter than or equal to 40 characters',
+        'titulo must be longer than or equal to 4 characters',
+        'titulo must match /^[a-zA-Z0-9\\s]+$/ regular expression',
+        'titulo must be a string',
+      ])
+    })
+
+    it('should return false and specific errors when titulo is null', () => {
+      const isValid = sut.validate({
+        ...CampanhaDataBuilder({}),
+        titulo: null,
+      })
+      expect(isValid).toBeFalsy()
+      expect(sut.errors['titulo']).toStrictEqual([
+        'titulo should not be empty',
+        'titulo must be shorter than or equal to 40 characters',
+        'titulo must be longer than or equal to 4 characters',
+        'titulo must match /^[a-zA-Z0-9\\s]+$/ regular expression',
+        'titulo must be a string',
+      ])
+    })
+
+    it('should return true and validate the correct value for titulo', () => {
+      const titulo = 'Titulo Valido'
+      const isValid = sut.validate({
+        ...props,
+        titulo,
+      })
+      expect(isValid).toBeTruthy()
+      expect(sut.validatedData).toStrictEqual(
+        new CampanhaRules({ ...props, titulo }),
+      )
+    })
+
+    it('should return true for titulo with exactly 4 characters', () => {
+      const titulo = 'abcd'
+      const isValid = sut.validate({
+        ...props,
+        titulo,
+      })
+      expect(isValid).toBeTruthy()
+      expect(sut.validatedData).toStrictEqual(
+        new CampanhaRules({ ...props, titulo }),
+      )
+    })
+
+    it('should return true for titulo with exactly 40 characters', () => {
+      const titulo = 'a'.repeat(40)
+      const isValid = sut.validate({
+        ...props,
+        titulo,
+      })
+      expect(isValid).toBeTruthy()
+      expect(sut.validatedData).toStrictEqual(
+        new CampanhaRules({ ...props, titulo }),
+      )
+    })
+  })
+
+  describe('Descricao Field', () => {
+    it('should return false and specific errors when descricao is less than 6 characters', () => {
+      const isValid = sut.validate({
+        ...CampanhaDataBuilder({}),
+        descricao: 'abcde',
+      })
+      expect(isValid).toBeFalsy()
+      expect(sut.errors['descricao']).toStrictEqual([
+        'descricao must be longer than or equal to 6 characters',
+      ])
+    })
+
+    it('should return false and specific errors when descricao exceeds 255 characters', () => {
+      const isValid = sut.validate({
+        ...CampanhaDataBuilder({}),
+        descricao: 'a'.repeat(256),
+      })
+      expect(isValid).toBeFalsy()
+      expect(sut.errors['descricao']).toStrictEqual([
+        'descricao must be shorter than or equal to 255 characters',
+      ])
+    })
+
+    it('should return false and specific errors when descricao is empty', () => {
+      const isValid = sut.validate({
+        ...CampanhaDataBuilder({}),
+        descricao: '',
+      })
+      expect(isValid).toBeFalsy()
+      expect(sut.errors['descricao']).toStrictEqual([
+        'descricao should not be empty',
+        'descricao must be longer than or equal to 6 characters',
+      ])
+    })
+
+    it('should return false and specific errors when descricao is not a string', () => {
+      const isValid = sut.validate({
+        ...CampanhaDataBuilder({}),
+        descricao: 123 as any,
+      })
+      expect(isValid).toBeFalsy()
+      expect(sut.errors['descricao']).toStrictEqual([
+        'descricao must be shorter than or equal to 255 characters',
+        'descricao must be longer than or equal to 6 characters',
+        'descricao must be a string',
+      ])
+    })
+
+    it('should return false and specific errors when descricao is null', () => {
+      const isValid = sut.validate({
+        ...CampanhaDataBuilder({}),
+        descricao: null,
+      })
+      expect(isValid).toBeFalsy()
+      expect(sut.errors['descricao']).toStrictEqual([
+        'descricao should not be empty',
+        'descricao must be shorter than or equal to 255 characters',
+        'descricao must be longer than or equal to 6 characters',
+        'descricao must be a string',
+      ])
+    })
+
+    it('should return true and validate the correct value for descricao', () => {
+      const descricao = 'Descricao valida para a campanha'
+      const isValid = sut.validate({
+        ...props,
+        descricao,
+      })
+      expect(isValid).toBeTruthy()
+      expect(sut.validatedData).toStrictEqual(
+        new CampanhaRules({ ...props, descricao }),
+      )
+    })
+
+    it('should return true for descricao with exactly 6 characters', () => {
+      const descricao = 'abcdef'
+      const isValid = sut.validate({
+        ...props,
+        descricao,
+      })
+      expect(isValid).toBeTruthy()
+      expect(sut.validatedData).toStrictEqual(
+        new CampanhaRules({ ...props, descricao }),
+      )
+    })
+
+    it('should return true for descricao with exactly 255 characters', () => {
+      const descricao = 'a'.repeat(255)
+      const isValid = sut.validate({
+        ...props,
+        descricao,
+      })
+      expect(isValid).toBeTruthy()
+      expect(sut.validatedData).toStrictEqual(
+        new CampanhaRules({ ...props, descricao }),
+      )
+    })
+  })
+
   describe('QtdBilhetesTotais Field', () => {
     it('should return false and specific errors when qtdBilhetesTotais is less than 10', () => {
       const isValid = sut.validate({

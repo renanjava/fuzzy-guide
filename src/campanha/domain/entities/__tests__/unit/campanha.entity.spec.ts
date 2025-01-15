@@ -12,6 +12,8 @@ describe('CampanhaEntity unit tests', () => {
   })
   it('constructor method', () => {
     expect(CampanhaEntity.validate).toHaveBeenCalled()
+    expect(sut.props.titulo).toEqual(props.titulo)
+    expect(sut.props.descricao).toEqual(props.descricao)
     expect(sut.props.qtdBilhetesTotais).toEqual(props.qtdBilhetesTotais)
     expect(sut.props.dataInicioCampanha).toEqual(props.dataInicioCampanha)
     expect(sut.props.campanhaAtiva).toEqual(props.campanhaAtiva)
@@ -21,6 +23,19 @@ describe('CampanhaEntity unit tests', () => {
     expect(sut.props.porcentagemProgresso).toEqual(0)
   })
 
+  it('getter titulo', () => {
+    expect(sut.titulo).toEqual(props.titulo)
+    expect(sut.props.titulo).toBeDefined()
+    expect(sut.props.titulo).toEqual(props.titulo)
+    expect(typeof sut.props.titulo).toBe('string')
+  })
+
+  it('getter descricao', () => {
+    expect(sut.descricao).toEqual(props.descricao)
+    expect(sut.props.descricao).toBeDefined()
+    expect(sut.props.descricao).toEqual(props.descricao)
+    expect(typeof sut.props.descricao).toBe('string')
+  })
   it('getter qtdBilhetesTotais', () => {
     expect(sut.qtdBilhetesTotais).toEqual(props.qtdBilhetesTotais)
     expect(sut.props.qtdBilhetesTotais).toBeDefined()
