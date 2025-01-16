@@ -1,13 +1,14 @@
 import { faker } from '@faker-js/faker'
 import { CampanhaProps } from '../../entities/campanha.entity'
 import { DomainRules } from '../../common/domain.rules'
+import { DateRules } from '@/shared/common/date.rules'
 
 type Props = Partial<CampanhaProps>
 
 export function CampanhaDataBuilder(props: Props): CampanhaProps {
   return {
-    titulo: props.titulo ?? 'Campanha Teste',
-    descricao: props.descricao ?? 'Descrição padrão de teste',
+    titulo: props.titulo ?? faker.lorem.words(4),
+    descricao: props.descricao ?? faker.lorem.words(6),
     qtdBilhetesTotais:
       props.qtdBilhetesTotais ??
       faker.number.int({
@@ -21,9 +22,17 @@ export function CampanhaDataBuilder(props: Props): CampanhaProps {
         max: DomainRules.MAX_BILHETES,
       }),
     dataInicioCampanha: props.dataInicioCampanha ?? new Date(),
-    dataFimCampanha: props.dataFimCampanha ?? null,
-    porcentagemProgresso: props.porcentagemProgresso ?? 50,
-    campanhaAtiva: props.campanhaAtiva ?? true,
+    dataFimCampanha:
+      props.dataFimCampanha ??
+      faker.date.soon({ days: 120, refDate: DateRules.TOMORROW }),
+    porcentagemProgresso:
+      props.porcentagemProgresso ??
+      faker.number.float({
+        min: DomainRules.MIN_PROGRESS_PERCENTAGE,
+        max: DomainRules.MAX_PROGRESS_PERCENTAGE,
+        fractionDigits: 2,
+      }),
+    campanhaAtiva: props.campanhaAtiva ?? faker.datatype.boolean(),
     valorUnitarioBilhete:
       props.valorUnitarioBilhete ??
       faker.number.float({

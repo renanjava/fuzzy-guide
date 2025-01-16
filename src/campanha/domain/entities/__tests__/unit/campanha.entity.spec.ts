@@ -25,8 +25,11 @@ describe('CampanhaEntity unit tests', () => {
     expect(sut.props.campanhaAtiva).toEqual(props.campanhaAtiva)
     expect(sut.props.valorUnitarioBilhete).toEqual(props.valorUnitarioBilhete)
     expect(sut.props.qtdBilhetesComprados).toEqual(props.qtdBilhetesComprados)
-    expect(sut.props.dataFimCampanha).toBeNull()
-    expect(sut.props.porcentagemProgresso).toEqual(50)
+    expect(
+      sut.props.dataFimCampanha === null ||
+        sut.props.dataFimCampanha instanceof Date,
+    ).toBeTruthy()
+    expect(sut.props.porcentagemProgresso).toEqual(props.porcentagemProgresso)
   })
 
   it('getter titulo', () => {
@@ -100,10 +103,15 @@ describe('CampanhaEntity unit tests', () => {
   })
 
   it('getter dataFimCampanha', () => {
-    expect(sut.dataFimCampanha).toBeNull()
+    expect(
+      sut.dataFimCampanha === null || sut.dataFimCampanha instanceof Date,
+    ).toBeTruthy()
     expect(sut.props.dataFimCampanha).toBeDefined()
     expect(sut.props.dataFimCampanha).toEqual(props.dataFimCampanha)
-    expect(sut.props.dataFimCampanha).toBeNull()
+    expect(
+      sut.props.dataFimCampanha === null ||
+        sut.props.dataFimCampanha instanceof Date,
+    ).toBeTruthy()
   })
 
   it('setter dataFimCampanha', () => {
@@ -120,7 +128,7 @@ describe('CampanhaEntity unit tests', () => {
   })
 
   it('getter porcentagemProgresso', () => {
-    expect(sut.porcentagemProgresso).toEqual(50)
+    expect(sut.porcentagemProgresso).toEqual(props.porcentagemProgresso)
     expect(sut.props.porcentagemProgresso).toBeDefined()
     expect(sut.props.porcentagemProgresso).toEqual(props.porcentagemProgresso)
     expect(typeof sut.props.porcentagemProgresso).toBe('number')
