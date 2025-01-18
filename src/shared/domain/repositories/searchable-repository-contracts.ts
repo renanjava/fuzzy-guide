@@ -58,6 +58,7 @@ export class SearchParams {
 
 export interface SearchableRepositoryInterface<
   E extends Entity,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   SearchInput,
   SearchOutput,
 > extends RepositoryInterface<E> {
