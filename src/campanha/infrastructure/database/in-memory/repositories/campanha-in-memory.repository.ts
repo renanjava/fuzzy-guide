@@ -2,10 +2,9 @@ import { CampanhaEntity } from '@/campanha/domain/entities/campanha.entity'
 import { CampanhaRepository } from '@/campanha/domain/repositories/campanha.repository'
 import { ConflictError } from '@/shared/domain/errors/conflict-error'
 import { NotFoundError } from '@/shared/domain/errors/not-found-error'
-import { InMemoryRepository } from '@/shared/domain/repositories/in-memory.repository'
-
+import { InMemorySearchableRepository } from '@/shared/domain/repositories/in-memory-searchable.repository'
 export class CampanhaInMemoryRepository
-  extends InMemoryRepository<CampanhaEntity>
+  extends InMemorySearchableRepository<CampanhaEntity>
   implements CampanhaRepository
 {
   async findByTitulo(titulo: string): Promise<CampanhaEntity> {
