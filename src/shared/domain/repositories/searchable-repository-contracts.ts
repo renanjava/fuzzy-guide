@@ -3,12 +3,22 @@ import { RepositoryInterface } from './repository-contracts'
 
 export type SortDirection = 'asc' | 'desc'
 
-export type SearchProps<Filter = string> = {
+export type SearchParamsProps<Filter = string> = {
   page?: number
   perPage?: number
   sort?: string | null
   sortDir?: SortDirection | null
   filter?: Filter | null
+}
+
+export type SearchResultProps<E extends Entity, Filter> = {
+  items: E[]
+  total: number
+  currentPage: number
+  perPage: number
+  sort: string | null
+  sortDir: string | null
+  filter: Filter | null
 }
 
 export class SearchParams {
@@ -17,7 +27,7 @@ export class SearchParams {
   protected _sort: string | null
   protected _sortDir: SortDirection | null
   protected _filter: string | null
-  constructor(props: SearchProps = {}) {
+  constructor(props: SearchParamsProps = {}) {
     this.page = props.page
     this.perPage = props.perPage
     this.sort = props.sort
@@ -85,11 +95,45 @@ export class SearchParams {
   }
 }
 
+export class SearchResult<E extends Entity, Filter = string> {
+  readonly items: E[]
+  readonly total: number
+  readonly currentPage: number
+  readonly perPage: number
+  readonly lastPage: number
+  readonly sort: string | null
+  readonly sortDir: string | null
+  readonly filter: Filter | null
+
+  constructor(props: SearchResultProps<E, Filter>) {
+    this.items = props.items
+    this.total = props.total
+    this.currentPage = props.currentPage
+    this.perPage = props.perPage
+    this.lastPage = Math.ceil(this.total / this.perPage)
+    this.sort = props.sort ?? null
+    this.sortDir = props.sortDir ?? null
+    this.filter = props.filter ?? null
+  }
+
+  toJson(forceEntity = false) {
+    return {
+      items: forceEntity ? this.items.map(item => item.toJson) : this.items,
+      total: this.total,
+      currentPage: this.currentPage,
+      perPage: this.perPage,
+      lastPage: this.lastPage,
+      sort: this.sort,
+      sortDir: this.sortDir,
+      filter: this.filter,
+    }
+  }
+}
+
 export interface SearchableRepositoryInterface<
   E extends Entity,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  SearchInput,
-  SearchOutput,
+  SearchParams,
+  SearchResult,
 > extends RepositoryInterface<E> {
-  search(props: SearchParams): Promise<SearchOutput>
+  search(props: SearchParams): Promise<SearchResult>
 }
