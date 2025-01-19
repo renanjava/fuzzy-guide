@@ -7,8 +7,8 @@ type Props = Partial<CampanhaProps>
 
 export function CampanhaDataBuilder(props: Props): CampanhaProps {
   return {
-    titulo: props.titulo ?? faker.lorem.words(4),
-    descricao: props.descricao ?? faker.lorem.words(6),
+    titulo: props.titulo ?? 'Titulo teste',
+    descricao: props.descricao ?? 'Descricao teste',
     qtdBilhetesTotais:
       props.qtdBilhetesTotais ??
       faker.number.int({
